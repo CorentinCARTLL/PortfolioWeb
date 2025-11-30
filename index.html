@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corentin Cartallier | Ingénieur</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23d4af37'/></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & THÈME --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #2a2a2a;
+            --text-light: #666666;
+            --gold-primary: #d4af37; 
+            --gold-dark: #8c7322; 
+            --gold-light: rgba(212, 175, 55, 0.1);
+            --font-title: 'VT323', monospace;
+            --font-body: 'Fira Code', monospace;
+
+            /* --- CONFIGURATION DES CURSEURS --- */
+            --cursor-default: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><rect x='2' y='2' width='20' height='20' fill='none' stroke='%23d4af37' stroke-width='2'/><circle cx='12' cy='12' r='2' fill='%23d4af37'/></svg>") 12 12, auto;
+            --cursor-pointer: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><rect x='2' y='2' width='20' height='20' fill='%23d4af37' stroke='%23d4af37' stroke-width='2'/></svg>") 12 12, pointer;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* --- SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 14px; }
+        ::-webkit-scrollbar-track { background: #f4f4f4; border-left: 1px solid #e0e0e0; }
+        ::-webkit-scrollbar-thumb { background-color: var(--gold-primary); border: 3px solid var(--bg-color); border-radius: 0px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: var(--gold-dark); }
+        html { scrollbar-width: thin; scrollbar-color: var(--gold-primary) #f4f4f4; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+            cursor: var(--cursor-default);
+        }
+
+        /* --- GESTION DES CURSEURS SUR LES ÉLÉMENTS CLIQUABLES --- */
+        a, button, .btn, .btn-large, .header-btn, .project-card, .arrow-btn, .lang-flag {
+            text-decoration: none; 
+            color: inherit; 
+            transition: 0.3s; 
+            cursor: var(--cursor-pointer) !important;
+        }
+
+        ul { list-style: none; }
+
+        /* --- HEADER (STATIQUE) --- */
+        header {
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold-light);
+            width: 100%;
+            background: var(--bg-color); 
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* --- HERO SECTION (Padding ajusté) --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: row; 
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 10% 100px;
+            position: relative;
+            gap: 50px;
+        }
+
+        .hero-text-content { flex: 1; max-width: 600px; z-index: 2; }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 5.5rem;
+            line-height: 0.9;
+            margin-bottom: 25px;
+            color: #000;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            border-left: 3px solid var(--gold-primary);
+            padding-left: 20px;
+            background: rgba(212, 175, 55, 0.05);
+            padding: 20px;
+        }
+
+        .hero strong { color: #000; font-weight: 600; }
+        .hero .highlight { color: var(--gold-dark); font-weight: bold; }
+
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 60px;
+            background-color: var(--gold-dark);
+            vertical-align: bottom;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- STYLE ASCII ART --- */
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-shadow: 0 0 5px var(--gold-light), 0 0 10px var(--gold-light);
+            transition: transform 0.5s ease-in-out;
+            overflow: hidden;
+            max-height: 500px; 
+        }
+
+        .ascii-art-portrait {
+            font-family: var(--font-body); 
+            font-size: 5px; 
+            line-height: 0.95; 
+            color: var(--gold-dark);
+            white-space: pre;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            max-height: 0;
+            transition: opacity 1s ease-out;
+            max-width: 100%;
+        }
+
+        @keyframes scan-in {
+            0% { opacity: 0; max-height: 0; }
+            10% { opacity: 0.5; }
+            100% { opacity: 0.85; max-height: 500px; }
+        }
+
+        .ascii-art-portrait.is-loaded {
+            animation: scan-in 2s ease-out forwards;
+        }
+
+        /* --- CTA BUTTONS (HERO) --- */
+        .hero-cta-container { display: flex; align-items: center; gap: 40px; margin-top: 20px; }
+        .project-link-wrapper { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+        .arrow-btn {
+            display: flex; justify-content: center; align-items: center; width: 60px; height: 60px;
+            border: 2px solid var(--gold-primary); border-radius: 50%; color: var(--gold-dark);
+            font-size: 2rem; transition: 0.3s;
+        }
+        .project-link-text {
+            font-family: var(--font-title); font-size: 1.5rem; font-weight: bold;
+            color: var(--gold-dark); text-transform: uppercase; transition: 0.3s;
+        }
+        .project-link-wrapper:hover .arrow-btn { background: var(--gold-primary); color: #fff; transform: translateY(-3px); }
+        .project-link-wrapper:hover .project-link-text { color: var(--gold-primary); transform: translateY(-3px); }
+
+        /* --- SECTIONS --- */
+        section { padding: 100px 10%; }
+        h2 {
+            font-family: var(--font-title); font-size: 3.5rem; margin-bottom: 50px;
+            color: #000; display: inline-block; border-bottom: 4px solid var(--gold-primary); line-height: 0.8;
+        }
+
+        /* --- PROJETS --- */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
+        .project-card {
+            background: #fff; border: 1px solid #eaeaea; padding: 0; transition: 0.3s;
+            position: relative; display: flex; flex-direction: column; overflow: hidden;
+        }
+        .project-card a { display: flex; flex-direction: column; height: 100%; cursor: pointer; }
+        .project-card:hover { border-color: var(--gold-primary); box-shadow: 5px 5px 0px var(--gold-light); }
+        .project-media { 
+            width: 100%; height: 200px; object-fit: cover; 
+            border-bottom: 2px solid var(--gold-light); background-color: #f7f7f7; padding: 10px;
+        }
+        .project-content { padding: 25px 35px 35px 35px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-card h3 { font-family: var(--font-title); font-size: 2.2rem; margin-bottom: 15px; color: #111; }
+        .project-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; flex-grow: 1; }
+        .project-tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { font-size: 0.75rem; background: var(--gold-light); color: var(--gold-dark); padding: 4px 12px; font-weight: 600; border-radius: 2px; }
+
+        /* --- SKILLS --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .skill-card {
+            background: #fff; border: 1px solid #e0e0e0; padding: 25px;
+            transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); position: relative; overflow: hidden;
+        }
+        .skill-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--gold-primary); transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;
+        }
+        .skill-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); }
+        .skill-card:hover::before { transform: scaleX(1); }
+        .skill-title { color: var(--gold-dark); margin-bottom: 12px; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; }
+        .skill-title::before { content: '>'; margin-right: 10px; font-family: var(--font-title); font-size: 1.5rem; }
+
+        /* --- FOOTER & BUTTONS --- */
+        .btn-large {
+            display: inline-block; padding: 12px 35px; border: 2px solid var(--gold-primary);
+            color: var(--gold-dark); font-family: var(--font-title); font-size: 1.6rem;
+            text-transform: uppercase; font-weight: bold; transition: all 0.3s ease; background: #fff;
+            cursor: var(--cursor-pointer);
+        }
+        .btn-large:hover { background: var(--gold-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px var(--gold-light); }
+        
+        footer { text-align: center; padding: 60px; border-top: 2px solid var(--gold-light); color: var(--text-light); font-size: 0.9rem; background: #fafafa; }
+        
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; gap: 60px; }
+            .hero-text-content { max-width: 100%; }
+            .hero h1 { font-size: 4.5rem; }
+            .hero .subtitle { margin-left: auto; margin-right: auto; border-left: none; border-top: 3px solid var(--gold-primary); }
+            .hero-cta-container { justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .cursor { height: 40px; }
+            header { padding: 15px; }
+            h2 { font-size: 2.8rem; }
+            .hero-cta-container { flex-direction: column; align-items: center; gap: 20px; }
+            .ascii-art-portrait { font-size: 4px; line-height: 0.9; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">CORENTIN.C_</div>
+    </header>
+
+    <section class="hero">
+        
+        <div class="hero-text-content">
+            <p style="color: var(--gold-dark); margin-bottom: 10px; font-weight:600;">// Initialisation du système</p>
+            <h1>Corentin<br>Cartallier<span class="cursor"></span></h1>
+            
+            <div class="subtitle">
+                Étudiant Ingénieur Informatique (CESI), spécialisé en <strong>Systèmes Embarqués</strong>, <strong>IA</strong> et <strong>Data</strong>.<br><br>
+                Je recherche activement un <span class="highlight">Stage Ingénieur (Avril - Juillet 2026)</span>.
+                Passionné par l'alliance du hardware et de l'intelligence artificielle, j'ai récemment remporté le Prix de l'Innovation 2025.
+            </div>
+
+            <div class="hero-cta-container">
+                <a href="#projects" class="project-link-wrapper">
+                    <div class="arrow-btn" aria-label="Voir les projets">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                    <span class="project-link-text">Mes réalisations</span>
+                </a>
+                <a href="#contact" class="btn-large">Me Contacter</a>
+            </div>
+        </div>
+
+        <div class="hero-image-container">
+            <pre class="ascii-art-portrait" id="ascii-portrait">
+..                                                                                                                                                                            
+                                                                                                                                                                              
+                                                                          .;+X$$$$$$X+:     :;+XXXXx;:.                                                                       
+                                                                      .;$&&&&&&&&&&&&&&&$X$&&&&&&&&&&&&&$X;.                                                                  
+                                                                   .+$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$x:                                                               
+                                                                :X$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$+:                                                            
+                                                            .+$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$:                                                          
+                                                         :X&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$:                                                        
+                                                      :X&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X:                                                      
+                                                    ;$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&+.                                                    
+                                                  :$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&+.                                                  
+                                                .X&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&;                                                 
+                                               :&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X                                                
+                                              +&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&;                                              
+                                             +&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&x                                             
+                                            +&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X:                                           
+                                           ;$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$;                                          
+                                          :X&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$:                                         
+                                         .+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$:                                        
+                                         :$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&x.                                       
+                                         ;&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&:                                       
+                                         ;&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X                                       
+                                         ;&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$X$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&:                                      
+                                        .+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X:X&&&&&&&&&&&&&$X&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&;                                      
+                                        .+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$::X&&&&&$:&&&&&&$+;&&&&$$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&.                                      
+                                        .+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$;.;&&&&&&+.X&&&&&$;.X;&&&$;+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X                                       
+                                         ;&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&X:.;&&&&&$;  +X&&&$X;  .x;&&&+ :$&X$&&&&&&&&&&&&&&&&&&&&&&&&&;                                       
+                                         :&&&&&&&&&&&&&&&&$$&$$$$$&&&&$+;+XXXXXxX:   ++$&&X+:    .+;$&X:  ;$X+&&&&&&&&&&&&&&&&&&&&&&&+.                                       
+                                         :X&&&&&&&&&&&&&&X:;+xXx;x$X:       :+x.   .+;$&$;;       .;;x&x:   ;X;x&&&&&&&&&&&&&&&&&&&&$:                                        
+                                          ;$&&&&&&&&&&&$;   .::.         .;:.     :;+$x              :+XX:    :+;+$&&&&&&&&&&&&&&&&&X:                                        
+                                           +&&&&&&&&&&+.       ........          ::;:                  ..;+.....     .;++$&&&&&&&&&&+.                                        
+                                           .x&&&&&&&&+.     :x&&&&&&&&&&&&&$X;:.               .:+X$&&&&$$&&&&&&$+:      .x&&&&&&&&&;                                         
+                                            :$&&&&&&X.   :+&&&&&&&&&&&&&&&&&&&&X:             ;$&&&&&&&&&&&&&&&&&&&&+.    ;&&&&&&&&$:                                         
+                                             X&&&&&&+  .+&&&$XXx+++XXX$$$$&&&&&&x            :$&&&&&&&$$XXxXXx+++xX$&$;   :$&&&&&&&X:                                         
+                                             +&&&&&$;  +$X;         .:::::::.:::::.       :: .::...::::::..         .+X;  :$&&&&&&&x.                                         
+                                             :$&&&&$: .:.      ::++++xxx++;;;::::.::       .::.::;++;++xXX+++;:.       .. :$&&&&&&&;                                          
+                                             .X&&&&$:       .:;;x$&&&&$X$+;x+:::::::.      .::::.:;+:x&&&$X&$Xx;;:        :$&&&&&&X:                                          
+                                        .;+;+;X&&&&$:      .:;X$+;+&&&&$$;:.:;;.::::.      ..:. ;;:::+X$$$$$;:+XX;:       :$&&&&&&X;+;;                                       
+                                        +;:. .+$&&&X.     .::..    ....        .::...      ..  .                   ::     .$&&&&&x:  :;;                                      
+                                        ;;;+:  .X&&X       ....::.    .::.:. .:::  ..       ..  ... ::::::.  .::::.        X&&&+. .:;;:;                                      
+                                        ;;::;:.  x&x              .::.    ..:. ..  .         .    ...                      +&&:  .;:;:;:                                      
+                                       .+:::::;. .X+                           .   .                                       ;&+  ::. ::;:                                      
+                                       .+.::  :+: ;+                           .    .                                      .X. :;.  ::;;                                      
+                                        :;::.:::;;:;                          .    ..       .                              .:.:+::. :;;;                                      
+                                        .;;:::...;:;                          ..  .          . ..                          :: ;.:....;+                                       
+                                         :+:::...;:;.                        :. ..               ..                        ;. ::..:: +:                                       
+                                          ;;.:;;:;.;:                      .::  .:                :.                      .;. :::.::;:                                        
+                                          :;:.  :X::;.                   .:.;:  .:::.      ...    :: ..                   .: ;+: :::;.                                        
+                                           :;:.    :;:.                 ..   ;;;+;+;:......;++++:;:   ...                .:: .;  .:+:                                         
+                                            ;;.    :;:..                       .::::;;:..:;:..::.      .::               .:.     .;:                                          
+                                             ;;    .;; .              .       :::::::::::.::::::.        .::             .;.    .;:                                           
+                                              :;+;;+x;  .           ..     .:+++++++++; :++++++++;;:.      :;:           :+:  :+;.                                            
+                                                    :;.  ..       .;::::;;;;+++++++;;;: .;+++++++++++++++;;::;:   .      ;;:;;:                                               
+                                                    .;:   ..     .+;xxX++:::.:.:::...:::::..  .::::..:;;+xXX+:;.  .     .+:                                                   
+                                                     ;;    .     ;;+;;:..:..:::::::..:.::::::;;;;::::::::+;.:.::  .     :;:                                                   
+                                                     :;:    . .. .:  :X$XXx++;;;::;::;;+;;:::..:..::;X$$x:   .:  .      ;;                                                    
+                                                      +:      ..  ..   :+Xx::  . ..    :   ..  .  ;;+;:.     ..  .     .;;                                                    
+                                                      ;;      ...  .    .:.:;::;:;;;;;;+;;::;;;;;::..:.                :+.                                                    
+                                                      .+:       .         .::          .          :..                  ;;                                                     
+                                                       ;;        .           ::+::..         .::..                    :+.                                                     
+                                                       :X;.                      .::::::::::..                       .+;                                                      
+                                                       .x+;.                      .:::;:;;:::..                      +X.                                                      
+                                                        X:;+..                      ...:::::.                      .+++                                                       
+                                                        x:.:+;..                  ..                             .:x:.+                                                       
+                                                        x:...;+;.               ..                             .:+;. :+                                                       
+                                                        +: ..::;+:.            ..                            .;+;:   :;                                                       
+                                                        +:  .:..:;X:..         .                           .;+;:.    ;;                                                       
+                                                        +:   .:....:x;..       .                         .x+::.      ;;                                                       
+                                                        +:    ......::++..     .                      .:+;::.        ;:                                                       
+                                                        x:     ...:..:::++:.    .                   .:+;:::          +:                                                       
+                                                      ;+X.       :..:..:.:;X;.:. ..            .:.:;+::.:.           ;:                                                       
+                                                    :+;;X.        .......:.::;+X+:...........:;Xx;::..:.             ;+:                                                      
+                                                   :+:;XX.         ..........:.:.::::::::::::::....:..               ;;;;                                                     
+                                                  :+::+$+            ......::.::......:::........:..                 ;+:;;.                                                   
+                                                 .X:.:X&;           . .............:::::...::... .                   :X;:;;.                                                  
+                                                ;X:..:X$;            .  .. . ..  ...                                 :$;::;;.                                                 
+                                               x;::.::X$:.           ..   ..    .                                    :X+:..;+                                                 
+                                              x;:..:..+X::            :.    .   ::                                   ;X+::.::X                                                
+                                            :x:.:..:..;x::            .:        .:..                                ::X;:::.::x.                                              
+                                        .;XX+:....:..::+;::            ..        .::.                              :.:X:..:.:.:+X+.                                           
+                                      :$;:;+:.::..:....;X::            .:.        ..:.                           .:..++::..:...:;;:+;                                         
+                                  .+X+:..;+.:.......:::::X.:            ..          .:.                         .:.:;+;..:.:.::::;;..;X;                                      
+                              .xX;::..:.:+:...:.::......;:X..            :.         .::. ..                    .::::x:;..:..:..:::;:...::;x+:                                 
+                          .;X;::.:::;:::+;.........:..:.::.x:            .:.           .                      .::::x.;::...::.::..;;::::..:::;x:.                             
+                       .+x;....:::;;:..:+:..:..:.::......;.:+:            .:                                .:...:+:.+...::..::.:::+;:::;::..::.:+X:.                         
+                    .+X;::.:...::;::...X:...........:..:.::::+:            :.                               :...:+:.:;:....:....:.::+:..:::::..:.::::x+:.                     
+                 .+X;.....:::::+;:.:::+;..:..:..:.....:...;:::+:            :                             .:.:.:+;::;:::...:..::..::;;:...:::::::......:;X+.                  
+             .:xx;:...:::::;;::::...::X..........:::....:.:;:.:;:           ..                           .:::.:;;..:+:..:::..:..::..:+:::....:::;:::::..::::;+:.              
+         .:;X+:...::::;;::.:.:::..::.;+..:..:.::...:::::;::;:..:;.           ..                         :.:.::;;....+:........:..::.::x:::......:.::;::::...:::;x;:           
+      .:xX:.:::;;::.......::::..:....x:......:.:::++;::::::;+:.:;;.           .                        :..:.:;+:...:;.::.:::..::..::..;;.::::.:...:...::::;;:::::.:xx:.       
+   .;X+:::;::......:.:.......:..:..:.x:.:.::.::++:.::::::;:::++::;;            .                      ......;+;:.::;xXXXX+;::......::::X:......:.::::::::..:..::;:::::;x+:.   
+:+X;:::::.....:..:.....:.:....:..::::x:...:::+;::::::::::::::;:++;:+;.                               .....:+;:;:::;x::::::::x+::::..:.:;;....:::::.::::...::..:....::;::::;x+:
+::::.:....:.....:...:....:.::.......:x:.::;+;:::::::::::::::::;+;;x;::+:.                     .     ...:+X;.::;.:++:::::::::::+x:::.:.::x.:::::.::::..::.:..::.::::..::::;::::
+.......:....:.....:...:........:....:x::;+:::::::::::::::::::::;;+;:;+:;+:.                  ..     .:+++:...::;+;::::::::::::::;+;::.::+::::::::..::..:.::.:::::::.......:::;
+...:.....:....:....:....:....:...:...+:x:::::::::::::::....::::::;;:::::;;+:.               :.     .;+;;:::;+;:::::::::..:::::::::;x;::.;;::::....:..:..:..:::::::.::.::......
+.:...:.....:....:....:....:........:::;:..:::::::::::::::::..::::::+:::::;;:;;:           .:.     :+;++x+;::.::::::::..::::::::::::::;x;;+...:.::.:..::.:::::.::...:..:.::.::.
+.......:.....:....:....::..::..:.....:..:...:::::::::....::::.::::::;;:::::;:::+:        .:.    .+;:::;:.:.::::::::..:............:..:::X:::..:..:.::.:::::.:::::.::.:..:..:.:
+:..:.....:..::.::...:......:.....:..:.................:..:.:::.:::::::;;::::;+;:;;.  ...::.    ;+::;;;:..:::::::..:..::.::.::.:::.:...:.:..::.:..:..:.:::..:::..:...::.:..:..:
+::...::...............:..:...:........:..:::..:..:....::..:::::..:::::.:;::::::;;:;:   .     .+:.:;+;::::::.:..:.:.::..:..::.::..:.::...::..:..::..:....::::..:::..::...::.:::::
+::.::.:::.::..:..:.............:..:...::.........::::.....:.::::....:::::;;::::::;;+;.     .:;:.:;+:..::.....::.::..:..:.::..:..::..::.:.::..:....::::..:::..::..:.::...::::::
+::..:.::...........:...:..:.........:.......:..:....::..:...:..::.:..::::::;;:..:::;+;.   .;;::;x:.:.....:..:...:.:..::..:..:..:..:..:.:..::.::.::::..:::::.::..:..:.::.:::::.
+:::..:::..:::..:..::........:...:.......:.................::..:..::..:..:::::;:.::::;;+  :;:;+;:;....:..::..:.::..::..:.:..::.::..::..:.:..:..:::::.:.:::..::.::..:..::::::::.
+.:::::::..:::........:..::....:...:..:....::..:..::...:..:..::...:.::..:.::.:::;:.::::;x;+;+::..;:...:..:.....:.....:..::.:..:..::..:.:.:...::::..:.:::::..:..:..::.:.::.::::.
+.::::::.::::..:..:.........:........:..:............:........:.::..:..::::::...:::::::;X+;:..:::::........:.....:..:.:...::..:..:..::..:..::::.:::::::...::..:..:..:::::.:::.:
+...:::..:.::.......:..:..:..:..:....:..::..:...:..:..:..::.:..:..::..:..:::::::..::::+Xx;:....:;:..:..:.....::.::.::.::..:.::.::..:..::.::::..::::::.:::..:.::.::.::::.::::.::
+:....:.:.:::...:.................:...........:....:.....:......:..:.::..:.::::::::.:+x;:;;::..:;:...:..:::.:..:..:..:..::..:..:..::..:.::::::::::..:..::..:...:..::::..::::.::
+:::.:..:.::..:..:::..:..:..:.::....:..:..:.....::...:.....::.:.::..:......::::::..:+;;::;:;:...;:.:..:...:.:..:..:..:..:..:..:..::.:::::.::...::.:...::.::.:..:::.:::::..::
+;....::..::............::.::....:.....::...:......::..:..........:.:.::.::..::::::+;.;;::;;:...::.::.::..:..::.::.::.::..::.::.::..:..:...:..:.:..:.:::.::..:..::::..::::..:::
+;:.:...:::..:..:...:...:..:.:.....:....::....:......::..:...:......:..:..:..:..::;;:..:;::..::::.:..:..::.:..:..:..:..:.:..:..:..::..:..::.:..::..:...::..:..:.::::.::::..::::
+:;.:...:::...::..:...::::::.:..:....:.....:....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..:..::.:...::...::.::..:.::..:::::..:.::..::::
+:;...:.:::...:....::::::.::......:....:.....:....:....:......:..::..:..::.::..::..::;+:....:..::.::::.::.::..:..:.::.::.::...::.::.::..:..::.::..::..:..::..:..::.::::::.:::.::::.
+            </pre>
+        </div>
+
+    </section>
+
+    <section id="projects">
+        <h2>01. Réalisations</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <a href="https://github.com/CorentinCARTLL/Simulation-essaim-boids" target="_blank">
+                    <video class="project-media" autoplay loop muted playsinline>
+                        <source src="videos/boids.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                    <div class="project-content">
+                        <h3>Écosystème Boids</h3>
+                        <p>Simulation de vie artificielle en <strong>Python/Pygame</strong>. Implémentation de comportements émergents (Règles de Reynolds), physique vectorielle et interactions prédateur-proie.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Vecteurs</span>
+                            <span class="tag">IA</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <a href="https://ia4pme.code4sud.fr/" target="_blank">
+                    <img src="photo_hackaton.jpeg" alt="Photo Hackathon" class="project-media">
+                    <div class="project-content">
+                        <h3>Lauréat Hackathon Azuréen IA 2025</h3>
+                        <p><strong>Prix Innovation.</strong> Automatisation de workflows et architecture Data. Un défi technique relevé sous contrainte de temps forte.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">API</span>
+                            <span class="tag">Gagnant</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <a href="https://github.com/CorentinCARTLL/Simulateur-Strategie-F1" target="_blank">
+                    <img src="f1_strategie.png" alt="Photo Hackathon" class="project-media">
+                    <div class="project-content">
+                        <h3>Stratégie F1 Sim</h3>
+                        <p>Moteur de simulation physique et stratégique. Optimisation mathématique pour définir l'arrêt au stand parfait.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Maths</span>
+                            <span class="tag">Data</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <a href="https://projets-decole-dingenieur.gitbook.io/projet-coffre-fort/" target="_blank">
+                    <div class="project-content">
+                        <h3>Coffre-Fort IoT</h3>
+                        <p>Prototype physique sécurisé. C++ bas niveau sur microcontrôleur, gestion des interruptions et authentification.</p>
+                        <div class="project-tags">
+                            <span class="tag">C++</span>
+                            <span class="tag">Arduino</span>
+                            <span class="tag">Hardware</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <a href="https://github.com/CorentinCARTLL/NeuralNet-apprentissage-fonction-from-scratch" target="_blank">
+                    <img src="neural_network.png" alt="Architecture de base de données Clear-DATA SQL" class="project-media">
+                    <div class="project-content">
+                        <h3>NeuralNet Pure</h3>
+                        <p>Création d'un réseau de neurones "from scratch" sans framework. La preuve par le code de la compréhension des maths.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">R&D</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <a href="https://github.com/CorentinCARTLL/Projet-ClearDATA" target="_blank">
+                    <img src="clear_data_sql.png" alt="Architecture de base de données Clear-DATA SQL" class="project-media">
+                    <div class="project-content">
+                        <h3>Clear-DATA SQL</h3>
+                        <p>Architecture de base de données complète : du MCD Merise à l'implémentation SQL et l'injection de data via Python.</p>
+                        <div class="project-tags">
+                            <span class="tag">SQL</span>
+                            <span class="tag">Merise</span>
+                            <span class="tag">Database</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <a href="https://github.com/CorentinCARTLL/Projet-AI-BotNet-Detection" target="_blank">
+                    <div class="project-content">
+                        <h3>BotNet Hunter</h3>
+                        <p>Module de cybersécurité utilisant le Machine Learning (Random Forest) pour détecter les attaques réseaux en temps réel.</p>
+                        <div class="project-tags">
+                            <span class="tag">CyberSécurité</span>
+                            <span class="tag">ML</span>
+                            <span class="tag">Network</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>02. Compétences</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-title">DATA & IA</div>
+                <p>PyTorch, TensorFlow, Pandas, Scikit-learn, Réseaux de Neurones (MLP), Optimisation.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-title">DÉVELOPPEMENT</div>
+                <p>Python (Avancé), C/C++ (Système), Java, Web (Full Stack), Algorithmique complexe.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-title">HARDWARE / IOT</div>
+                <p>Arduino, Systèmes Embarqués, Capteurs, Electronique Numérique/Analogique.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-title">OUTILS & MÉTHODES</div>
+                <p>Git/GitHub, Linux (Bash), SQL (Merise), Fusion 360, Gestion de projet Agile.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="text-align: center; margin-bottom: 50px;">
+        <h2>03. Connexion</h2>
+        <p style="margin-bottom: 40px; font-size: 1.2rem; color: #555;">
+            Prêt à intégrer vos équipes pour un stage ingénieur dès Avril 2026.
+        </p>
+        
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            
+            <button id="btn-copy-email" class="btn-large" onclick="copyEmail()">
+                Copier mon Email
+            </button>
+
+            <a href="https://www.linkedin.com/in/corentin-cartallier-71a56035a" target="_blank" class="btn-large" style="background: transparent; color:var(--text-color); border-color: #333;">
+                LinkedIn
+            </a>
+
+            <a href="cv.pdf" target="_blank" class="btn-large">
+                Mon CV (PDF)
+            </a>
+
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="https://github.com/CorentinCARTLL" target="_blank" style="color: var(--gold-dark); font-weight: bold; font-family: var(--font-body);">[ Voir mon GitHub ]</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Corentin Cartallier &copy; 2025.<br>
+        <span style="font-size: 0.8rem; opacity: 0.7;">System.exit(0);</span></p>
+    </footer>
+
+    <script>
+        // --- PREVENTION DE L'INSPECTION ---
+        document.addEventListener('contextmenu', event => event.preventDefault()); // Bloque le clic droit
+
+        document.addEventListener('keydown', function(event) {
+            // Bloque F12
+            if (event.key === 'F12') {
+                event.preventDefault();
+            }
+
+            // Bloque Ctrl+Shift+I/J/U et Cmd+Option+I/J/U (Chrome/Mac)
+            if ((event.ctrlKey || event.metaKey) && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j')) {
+                event.preventDefault();
+            }
+            
+            // Bloque Ctrl+U / Cmd+U
+            if ((event.ctrlKey || event.metaKey) && (event.key === 'U' || event.key === 'u')) {
+                event.preventDefault();
+            }
+        });
+
+        // Fonction pour afficher/masquer le bouton de retour en haut (Supprimée du HTML/CSS, mais le JS ne s'exécutera pas)
+
+        // Effet Machine à écrire
+        const text = "Corentin Cartallier";
+        const titleElement = document.querySelector('h1');
+        titleElement.innerHTML = ""; 
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        titleElement.appendChild(cursor);
+
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                cursor.insertAdjacentHTML('beforebegin', text.charAt(i));
+                i++;
+                setTimeout(typeWriter, 100); 
+            }
+        }
+
+        // Fonction pour copier l'email
+        function copyEmail() {
+            const email = "corentin.cartallier@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const btn = document.getElementById('btn-copy-email');
+                const originalText = btn.innerText;
+                
+                // Feedback visuel
+                btn.innerText = "Email Copié !";
+                btn.style.background = "var(--gold-primary)";
+                btn.style.color = "#fff";
+                btn.style.borderColor = "var(--gold-primary)";
+
+                // Revenir à l'état normal après 2 secondes
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#fff";
+                    btn.style.color = "var(--gold-dark)";
+                    btn.style.borderColor = "var(--gold-primary)";
+                }, 2000);
+            }).catch(err => {
+                console.error('Erreur lors de la copie :', err);
+            });
+        }
+
+        window.onload = function() {
+            typeWriter();
+            const asciiPortrait = document.getElementById('ascii-portrait');
+            if (asciiPortrait) {
+                setTimeout(() => {
+                    asciiPortrait.classList.add('is-loaded');
+                }, 500); 
+            }
+        };
+
+        // Scroll doux
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
