@@ -48,7 +48,7 @@
             cursor: var(--cursor-default);
         }
 
-        /* --- GESTION DES CURSEURS SUR LES ÉLÉMENTS CLIQUABLES --- */
+        /* --- GESTION DES CURSEURS --- */
         a, button, .btn, .btn-large, .header-btn, .project-card, .arrow-btn, .lang-flag {
             text-decoration: none; 
             color: inherit; 
@@ -58,7 +58,7 @@
 
         ul { list-style: none; }
 
-        /* --- HEADER (STATIQUE) --- */
+        /* --- HEADER --- */
         header {
             padding: 15px 50px;
             display: flex;
@@ -78,7 +78,7 @@
             font-weight: bold;
         }
 
-        /* --- HERO SECTION (Padding ajusté) --- */
+        /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -161,7 +161,7 @@
             animation: scan-in 2s ease-out forwards;
         }
 
-        /* --- CTA BUTTONS (HERO) --- */
+        /* --- CTA BUTTONS --- */
         .hero-cta-container { display: flex; align-items: center; gap: 40px; margin-top: 20px; }
         .project-link-wrapper { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .arrow-btn {
@@ -183,21 +183,32 @@
             color: #000; display: inline-block; border-bottom: 4px solid var(--gold-primary); line-height: 0.8;
         }
 
-        /* --- PROJETS --- */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
+        /* --- PROJETS (MODIFIÉ POUR 3 PAR LIGNE) --- */
+        .projects-grid { 
+            display: grid; 
+            /* 350px permet d'avoir 3 cartes sur un écran standard (~1200px) */
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 35px; 
+        }
+        
         .project-card {
             background: #fff; border: 1px solid #eaeaea; padding: 0; transition: 0.3s;
             position: relative; display: flex; flex-direction: column; overflow: hidden;
         }
         .project-card a { display: flex; flex-direction: column; height: 100%; cursor: pointer; }
         .project-card:hover { border-color: var(--gold-primary); box-shadow: 5px 5px 0px var(--gold-light); }
+        
+        /* Ajustement hauteur média pour équilibre avec la largeur réduite */
         .project-media { 
-            width: 100%; height: 200px; object-fit: cover; 
-            border-bottom: 2px solid var(--gold-light); background-color: #f7f7f7; padding: 10px;
+            width: 100%; 
+            height: 280px; /* Un peu moins haut que 350px pour garder l'harmonie */
+            object-fit: cover; 
+            border-bottom: 2px solid var(--gold-light); background-color: #f7f7f7; padding: 0;
         }
-        .project-content { padding: 25px 35px 35px 35px; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-card h3 { font-family: var(--font-title); font-size: 2.2rem; margin-bottom: 15px; color: #111; }
-        .project-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; flex-grow: 1; }
+        
+        .project-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-card h3 { font-family: var(--font-title); font-size: 2rem; margin-bottom: 15px; color: #111; }
+        .project-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; flex-grow: 1; line-height: 1.5; }
         .project-tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
         .tag { font-size: 0.75rem; background: var(--gold-light); color: var(--gold-dark); padding: 4px 12px; font-weight: 600; border-radius: 2px; }
 
@@ -242,6 +253,7 @@
             h2 { font-size: 2.8rem; }
             .hero-cta-container { flex-direction: column; align-items: center; gap: 20px; }
             .ascii-art-portrait { font-size: 4px; line-height: 0.9; }
+            .projects-grid { grid-template-columns: 1fr; } /* 1 colonne sur mobile */
         }
     </style>
 </head>
@@ -279,8 +291,6 @@
 
         <div class="hero-image-container">
             <pre class="ascii-art-portrait" id="ascii-portrait">
-..                                                                                                                                                                            
-                                                                                                                                                                              
                                                                           .;+X$$$$$$X+:     :;+XXXXx;:.                                                                       
                                                                       .;$&&&&&&&&&&&&&&&$X$&&&&&&&&&&&&&$X;.                                                                  
                                                                    .+$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$x:                                                               
@@ -377,19 +387,19 @@
 .:...:.....:....:....:....:........:::;:..:::::::::::::::::..::::::+:::::;;:;;:           .:.     :+;++x+;::.::::::::..::::::::::::::;x;;+...:.::.:..::.:::::.::...:..:.::.::.
 .......:.....:....:....::..::..:.....:..:...:::::::::....::::.::::::;;:::::;:::+:        .:.    .+;:::;:.:.::::::::..:............:..:::X:::..:..:.::.:::::.:::::.::.:..:..:.:
 :..:.....:..::.::...:......:.....:..:.................:..:.:::.:::::::;;::::;+;:;;.  ...::.    ;+::;;;:..:::::::..:..::.::.::.:::.:...:.:..::.:..:..:.:::..:::..:...::.:..:..:
-::...::...............:..:...:........:..:::..:..:....::..:::::..:::::.:;::::::;;:;:   .     .+:.:;+;::::::.:..:.:.::..:..::.::..:.::...::..:..::..:....::::..:::..::...::.:::::
+::...::...............:..:...:........:..:::..:..:....::..:::::..:::::.:;::::::;;:;:   .     .+:.:;+;::::::.:..:.:.::..:..::.::..:.::...::..:..::..:....::::..:::..::...::.:::
 ::.::.:::.::..:..:.............:..:...::.........::::.....:.::::....:::::;;::::::;;+;.     .:;:.:;+:..::.....::.::..:..:.::..:..::..::.:.::..:....::::..:::..::..:.::...::::::
-::..:.::...........:...:..:.........:.......:..:....::..:...:..::.:..::::::;;:..:::;+;.   .;;::;x:.:.....:..:...:.:..::..:..:..:..:..:.:..::.::.::::..:::::.::..:..:.::.:::::.
+::..:.::...........:...:..:.........:.......:..:....::..:...:..::.:..::::::;;:..:::;+;.   .;;::;x:.:.....:..:...:.:..::..:..:..:..:.:..::.::.::::..:::::.::..:..:.::.:::::.
 :::..:::..:::..:..::........:...:.......:.................::..:..::..:..:::::;:.::::;;+  :;:;+;:;....:..::..:.::..::..:.:..::.::..::..:.:..:..:::::.:.:::..::.::..:..::::::::.
 .:::::::..:::........:..::....:...:..:....::..:..::...:..:..::...:.::..:.::.:::;:.::::;x;+;+::..;:...:..:.....:.....:..::.:..:..::..:.:.:...::::..:.:::::..:..:..::.:.::.::::.
-.::::::.::::..:..:.........:........:..:............:........:.::..:..::::::...:::::::;X+;:..:::::........:.....:..:.:...::..:..:..::..:..::::.:::::::...::..:..:..:::::.:::.:
+.::::::.::::..:..:.........:........:..:............:........:.::..:..::::::...:::::::;X+;:..:::::........:.....:..:.:...::..:..::..:..::::.:::::::...::..:..:..:::::.:::.:
 ...:::..:.::.......:..:..:..:..:....:..::..:...:..:..:..::.:..:..::..:..:::::::..::::+Xx;:....:;:..:..:.....::.::.::.::..:.::.::..:..::.::::..::::::.:::..:.::.::.::::.::::.::
 :....:.:.:::...:.................:...........:....:.....:......:..:.::..:.::::::::.:+x;:;;::..:;:...:..:::.:..:..:..:..::..:..:..::..:.::::::::::..:..::..:...:..::::..::::.::
 :::.:..:.::..:..:::..:..:..:.::....:..:..:.....::...:.....::.:.::..:......::::::..:+;;::;:;:...;:.:..:...:.:..:..:..:..:..:..:..::.:::::.::...::.:...::.::.:..:::.:::::..::
 ;....::..::............::.::....:.....::...:......::..:..........:.:.::.::..::::::+;.;;::;;:...::.::.::..:..::.::.::.::..::.::.::..:..:...:..:.:..:.:::.::..:..::::..::::..:::
 ;:.:...:::..:..:...:...:..:.:.....:....::....:......::..:...:......:..:..:..:..::;;:..:;::..::::.:..:..::.:..:..:..:..:.:..:..:..::..:..::.:..::..:...::..:..:.::::.::::..::::
-:;.:...:::...::..:...::::::.:..:....:.....:....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..:..::.:...::...::.::..:.::..:::::..:.::..::::
-:;...:.:::...:....::::::.::......:....:.....:....:....:......:..::..:..::.::..::..::;+:....:..::.::::.::.::..:..:.::.::.::...::.::.::..:..::.::..::..:..::..:..::.::::::.:::.::::.
+:;.:...:::...::..:...::::::.:..:....:.....:....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..:..::.:...::...::.::..:.::..:::::..:.::..:::
+:;...:.:::...:....::::::.::......:....:.....:....:....:......:..::..:..::.::..::..::;+:....:..::.::::.::.::..:..:.::.::.::...::.::.::..:..::.::..::..:..::..:..::.::::::.:::.:
             </pre>
         </div>
 
@@ -398,40 +408,73 @@
     <section id="projects">
         <h2>01. Réalisations</h2>
         <div class="projects-grid">
-            
-            <div class="project-card">
-                <a href="https://github.com/CorentinCARTLL/Simulation-essaim-boids" target="_blank">
+            <div class="project-card large-feature">
+                <a href="https://github.com/CorentinCARTLL/Swarm-Intelligence-Cpp" target="_blank">
                     <video class="project-media" autoplay loop muted playsinline>
-                        <source src="videos/boids.mp4" type="video/mp4">
-                        Votre navigateur ne supporte pas la vidéo.
+                        <source src="videos/swarm-intelligence-demo.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo de démonstration de l'essaim.
                     </video>
                     <div class="project-content">
-                        <h3>Écosystème Boids</h3>
-                        <p>Simulation de vie artificielle en <strong>Python/Pygame</strong>. Implémentation de comportements émergents (Règles de Reynolds), physique vectorielle et interactions prédateur-proie.</p>
+                        <h3>DRONE SWARM INTELLIGENCE: Anti-Livelock et Pathfinding (C++)</h3>
+                        <p class="summary">
+                            Simulation tactique d'un essaim de drones autonomes. Le moteur intègre le <strong>Pathfinding (BFS)</strong> pour le contournement d'obstacles et résout le problème du <em>Livelock</em> grâce à une <strong>Mémoire de Pixels Individuelle</strong> (`Personal Pixel Grid`). Déploiement initial en <strong>Star Burst</strong> et exécution de mission en mode <em>Hardcore</em> (nombre exact d'unités requises).
+                        </p>
+                        
+                        
                         <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Vecteurs</span>
-                            <span class="tag">IA</span>
+                            <span class="tag tech-tag">C++17</span>
+                            <span class="tag tech-tag">SFML 3.0</span>
+                            <span class="tag tech-tag">Algorithmique</span>
+                            <span class="tag tech-tag">IA Distribuée</span>
+                            <span class="tag tech-tag">Pathfinding BFS</span>
                         </div>
                     </div>
                 </a>
             </div>
-
             <div class="project-card">
                 <a href="https://ia4pme.code4sud.fr/" target="_blank">
                     <img src="photo_hackaton.jpeg" alt="Photo Hackathon" class="project-media">
                     <div class="project-content">
-                        <h3>Lauréat Hackathon Azuréen IA 2025</h3>
-                        <p><strong>Prix Innovation.</strong> Automatisation de workflows et architecture Data. Un défi technique relevé sous contrainte de temps forte.</p>
+                        <h3>Hackathon IA 2025 : Solution Multi-Agents & RAG</h3>
+                        <p class="summary">
+                            <strong>Prix de l'Innovation.</strong> Conception d'une <strong>architecture Multi-Agents sur Azure</strong> visant à automatiser 60% des 300 demandes quotidiennes du support client.
+                            <br><br>
+                            Le cœur repose sur un système <strong>RAG (Vector Database)</strong> alimenté par l'historique des tickets. Nous avons développé des <strong>APIs 'hand-made'</strong> pour orchestrer l'analyse d'intention et automatiser des actions logistiques (bons d'expédition) et l'enregistrement <strong>ITSM</strong>. Le ROI estimé permet un amortissement en moins de 3 mois.
+                        </p>
                         <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">API</span>
+                            <span class="tag">Azure AI</span>
+                            <span class="tag">Multi-Agents</span>
+                            <span class="tag">Vector DB (RAG)</span>
+                            <span class="tag">ITSM/SQL</span>
+                            <span class="tag">API/Automation</span>
                             <span class="tag">Gagnant</span>
                         </div>
                     </div>
                 </a>
             </div>
-
+            <div class="project-card">
+                            <a href="https://github.com/CorentinCARTLL/Simulation-essaim-boids" target="_blank">
+                                <video class="project-media" autoplay loop muted playsinline>
+                                    <source src="videos/boids.mp4" type="video/mp4">
+                                    Votre navigateur ne supporte pas la vidéo.
+                                </video>
+                                <div class="project-content">
+                                    <h3>Simulation d'Écosystème Boids : Émergence & Prédation</h3>
+                                    <p class="summary">
+                                        <strong>Système Multi-Agents.</strong> Développement d'un moteur de simulation de vie artificielle en <strong>Python (Pygame)</strong>.
+                                        <br><br>
+                                        Implémentation vectorielle des <strong>Règles de Reynolds</strong> (Cohésion, Alignement, Séparation) pour générer des mouvements de nuée réalistes. Le projet intègre des mécaniques avancées de <strong>dynamique de groupe</strong> (équipes distinctes) et d'<strong>IA de survie</strong> avec gestion des prédateurs et calcul de vecteurs de fuite en temps réel.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="tag">Python</span>
+                                        <span class="tag">Pygame</span>
+                                        <span class="tag">Maths Vectorielles</span>
+                                        <span class="tag">IA Comportementale</span>
+                                        <span class="tag">Simulation</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
             <div class="project-card">
                 <a href="https://github.com/CorentinCARTLL/Simulateur-Strategie-F1" target="_blank">
                     <img src="f1_strategie.png" alt="Photo Hackathon" class="project-media">
