@@ -38,12 +38,12 @@
         /* --- THÈME SOMBRE (Luxe / Cuir / Château 18ème) --- */
         body.dark-mode {
             /* Fond Marron "Cuir Profond" / Acajou sombre */
-            --bg-color: #3a2f2a; 
+            --bg-color: #2b1d16; 
             
             /* Cartes Marron "Chocolat" / Cuir plus clair */
-            --card-bg: #4a3e36; 
+            --card-bg: #3d2b1f; 
             
-            /* Texte "Champagne" / Crème (plus doux que le blanc) */
+            /* Texte "Champagne" / Crème */
             --text-color: #f9f1d8; 
             
             /* Texte secondaire "Doré antique" / Beige */
@@ -79,7 +79,6 @@
             font-family: var(--font-body);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Grille de fond */
             background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
             background-size: 20px 20px;
             cursor: var(--cursor-default);
@@ -116,7 +115,6 @@
             letter-spacing: 2px;
             font-weight: bold;
         }
-        /* Ajustement logo en mode sombre pour qu'il brille plus */
         body.dark-mode .logo {
             color: var(--gold-primary);
             text-shadow: 0 0 10px rgba(230, 194, 101, 0.3);
@@ -146,7 +144,7 @@
             color: var(--bg-color);
         }
         body.dark-mode .theme-toggle:hover {
-            color: #2b1d16; /* Texte sombre sur fond or au survol */
+            color: #2b1d16;
         }
 
         /* --- HERO SECTION --- */
@@ -236,9 +234,9 @@
             text-shadow: none; 
             padding: 20px;
             border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); /* Ombre portée pour l'effet "posé sur le cuir" */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); /* Ombre portée */
             display: inline-block; 
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Fine bordure subtile */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
         }
 
         @keyframes scan-in {
@@ -290,12 +288,27 @@
             transition: color 0.4s ease;
         }
 
-        /* --- PROJETS --- */
+        /* --- PROJETS : GRILLE PC 3 COLONNES --- */
         .projects-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
             gap: 35px; 
             align-items: start;
+            /* MOBILE PAR DÉFAUT : 1 COLONNE */
+            grid-template-columns: 1fr; 
+        }
+
+        /* TABLETTE : 2 COLONNES */
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* PC / DESKTOP : EXACTEMENT 3 COLONNES */
+        @media (min-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
         .project-card {
@@ -321,7 +334,6 @@
             padding: 0;
             transition: height 0.4s ease, filter 0.4s ease;
         }
-        /* Teinte sépia/chaleureuse sur les images en mode sombre */
         body.dark-mode .project-media {
             filter: brightness(0.9) sepia(0.2);
             border-bottom: 2px solid var(--border-color);
@@ -399,7 +411,7 @@
 
         footer { text-align: center; padding: 60px; border-top: 2px solid var(--gold-light); color: var(--text-light); font-size: 0.9rem; background: var(--bg-color); transition: background 0.4s ease; }
         
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE GÉNÉRAL --- */
         @media (max-width: 992px) {
             .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; gap: 60px; }
             .hero-text-content { max-width: 100%; }
@@ -414,7 +426,7 @@
             section h2 { font-size: 2.8rem; }
             .hero-cta-container { flex-direction: column; align-items: center; gap: 20px; }
             .ascii-art-portrait { font-size: 4px; line-height: 0.9; }
-            .projects-grid { grid-template-columns: 1fr; } 
+            /* La grille projet est gérée par le CSS .projects-grid directement, pas besoin de réécrire ici */
         }
     </style>
 </head>
@@ -553,7 +565,7 @@
 :..:.....:..::.::...:......:.....:..:.................:..:.:::.:::::::;;::::;+;:;;.  ...::.    ;+::;;;:..:::::::..:..::.::.::.::.:::.:...:.:..::.:..:..:.:::..:::..:...::.:..:..:
 ::...::...............:..:...:........:..:::..:..:....::..:::::..:::::.:;::::::;;:;:   .     .+:.:;+;::::::.:..:.:.::..:..::.::..:.::...::..:..::..:....::::..:::..::...::.:::
 ::.::.:::.::..:..:.............:..:...::.........::::.....:.::::....:::::;;::::::;;+;.     .:;:.:;+:..::.....::.::..:..:.::..:..::..::.:.::..:....::::..:::..::..:.::...::::::
-::..:.::...........:...:..:.........:.......:..:....::..:...:..::.:..::::::;;:..:::;+;.   .;;::;x:.:.....:..:...:.:..::..:..:..:..:.:..::.::.::::..:::::.::..:..:.::.:::::.
+::..:.::...........:...:..:.........:.......:..:....::..:...:..::.:..::::::;;:..:::;+;.   .;;::;x:.:.....:..:...:.:..::..:..:..:.:..::.::.::::..:::::.::..:..:.::.:::::.
 :::..:::..:::..:..::........:...:.......:.................::..:..::..:..:::::;:.::::;;+  :;:;+;:;....:..::..:.::..::..:.:..::.::..::..:.:..:..:::::.:.:::..::.::..:..::::::::.
 .:::::::..:::........:..::....:...:..:....::..:..::...:..:..::...:.::..:.::.::.:::;:.::::;x;+;+::..;:...:..:.....:.....:..::.:..:..::..:.:.:...::::..:.:::::..:..:..::.:.::.::::.
 .::::::.::::..:..:.........:........:..:............:........:.::..:..::::::...:::::::;X+;:..:::::........:.....:..:.:...::..:..::..:..::::.:::::::...::..:..:..:::::.:::.:
@@ -562,7 +574,7 @@
 :::.:..:.::..:..:::..:..:..:.::....:..:..:.....::...:.....::.:.::..:......::::::..:+;;::;:;:...;:.:..:...:.:..:..:..:..:..:..::.::...::.:...::.::.:..:::.:::::..::
 ;....::..::............::.::....:.....::...:......::..:..........:.:.::.::..::::::+;.;;::;;:...::.::.::..:..::.::.::.::..::.::.::..:..:...:..:.:..:.:::.::..:..::::..::::..:::
 ;:.:...:::..:..:...:...:..:.:.....:....::....:......::..:...:......:..:..:..:..::;;:..:;::..::::.:..:..::.:..:..:..:..:..:.:..:..:..::..:..::.:..::..:...::..:..:.::::.::::..::::
-:;.:...:::...::..:...::::::.:..:....:.....:....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..::.:...::...::.::..:.::..:::::..:.::..:::
+:;.:...:::...::..:...::::::.:..:....:.....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..:..::.:...::...::.::..:.::..:::::..:.::..:::
 :;...:.:::...:....::::::.::......:....:.....:....:....:......:..::..:..::.::..::..::;+:....:..::.::::.::.::..:..:.::.::.::...::.::.::..:..::.::..::..:..::..:..::.::::::.:::.:
             </pre>
         </div>
