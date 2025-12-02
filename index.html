@@ -37,30 +37,15 @@
 
         /* --- THÈME SOMBRE (Luxe / Cuir / Château 18ème) --- */
         body.dark-mode {
-            /* Fond Marron "Cuir Profond" / Acajou sombre */
             --bg-color: #2b1d16;
-
-            /* Cartes Marron "Chocolat" / Cuir plus clair */
             --card-bg: #3d2b1f;
-
-            /* Texte "Champagne" / Crème */
             --text-color: #f9f1d8;
-
-            /* Texte secondaire "Doré antique" / Beige */
             --text-light: #d4c5a9;
-
-            /* Bordures "Bronze" */
             --border-color: #5d4037;
-
-            /* Or Vif pour les accents */
             --gold-primary: #e6c265;
             --gold-dark: #c49a45;
             --gold-light: rgba(230, 194, 101, 0.15);
-
-            /* Grille de fond subtilement colorée */
             --grid-line: #423026;
-
-            /* Ombres plus chaudes */
             --shadow-color: rgba(0,0,0,0.4);
         }
 
@@ -204,7 +189,10 @@
             position: relative;
             text-shadow: 0 0 5px var(--gold-light), 0 0 10px var(--gold-light);
             transition: transform 0.5s ease-in-out;
-            overflow: hidden;
+            /* FIX RESPONSIVE ICI */
+            overflow: hidden; 
+            width: 100%;
+            max-width: 100%;
             max-height: 500px;
         }
 
@@ -223,18 +211,13 @@
             max-width: 100%;
         }
 
-        /* --- CORRECTIF : ASCII SUR FOND TAUPE EN MODE SOMBRE --- */
         body.dark-mode .ascii-art-portrait {
-            /* Couleur TAUPE élégante (#a89f91) */
-            background-color: #a89f91;
-
-            /* Texte en Marron Foncé (la couleur de fond du site) pour un contraste "Encre sur Papier" */
+            background-color: #a89f91; /* Couleur TAUPE élégante */
             color: #2b1d16;
-
             text-shadow: none;
             padding: 20px;
             border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); /* Ombre portée */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             display: inline-block;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -248,7 +231,6 @@
         .ascii-art-portrait.is-loaded {
             animation: scan-in 2s ease-out forwards;
         }
-
         body.dark-mode .ascii-art-portrait.is-loaded {
             opacity: 1 !important;
         }
@@ -271,7 +253,6 @@
 
         .project-link-wrapper:hover .arrow-btn { background: var(--gold-primary); color: #fff; transform: translateY(-3px); }
         body.dark-mode .project-link-wrapper:hover .arrow-btn { color: #2b1d16; }
-
         .project-link-wrapper:hover .project-link-text { color: var(--gold-primary); transform: translateY(-3px); }
 
         /* --- SECTIONS --- */
@@ -293,22 +274,14 @@
             display: grid;
             gap: 35px;
             align-items: start;
-            /* MOBILE PAR DÉFAUT : 1 COLONNE */
             grid-template-columns: 1fr;
         }
 
-        /* TABLETTE : 2 COLONNES */
         @media (min-width: 768px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
-        /* PC / DESKTOP : EXACTEMENT 3 COLONNES */
         @media (min-width: 1200px) {
-            .projects-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .projects-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         .project-card {
@@ -346,8 +319,7 @@
         }
 
         /* --- EFFET HOVER SUR LE TEXTE --- */
-        .project-card p,
-        .project-card .summary {
+        .project-card p, .project-card .summary {
             font-size: 0.95rem;
             color: var(--text-light);
             line-height: 1.5;
@@ -358,13 +330,8 @@
             transform: translateY(20px);
             transition: all 0.4s ease-in-out;
         }
-
-        .project-card:hover p,
-        .project-card:hover .summary {
-            max-height: 500px;
-            opacity: 1;
-            margin-bottom: 15px;
-            transform: translateY(0);
+        .project-card:hover p, .project-card:hover .summary {
+            max-height: 500px; opacity: 1; margin-bottom: 15px; transform: translateY(0);
         }
 
         .project-tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; z-index: 10; background: var(--card-bg); transition: background 0.4s ease;}
@@ -388,7 +355,6 @@
         .skill-card:hover::before { transform: scaleX(1); }
         .skill-title { color: var(--gold-dark); margin-bottom: 12px; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; }
         body.dark-mode .skill-title { color: var(--gold-primary); }
-
         .skill-title::before { content: '>'; margin-right: 10px; font-family: var(--font-title); font-size: 1.5rem; }
         .skill-card p { color: var(--text-light); }
 
@@ -400,7 +366,6 @@
             cursor: var(--cursor-pointer);
         }
         body.dark-mode .btn-large { color: var(--gold-primary); }
-
         .btn-large:hover { background: var(--gold-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px var(--gold-light); }
         body.dark-mode .btn-large:hover { color: #2b1d16; }
 
@@ -419,14 +384,25 @@
             .hero .subtitle { margin-left: auto; margin-right: auto; border-left: none; border-top: 3px solid var(--gold-primary); }
             .hero-cta-container { justify-content: center; }
         }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 3.5rem; }
             .cursor { height: 40px; }
             header { padding: 15px; }
             section h2 { font-size: 2.8rem; }
             .hero-cta-container { flex-direction: column; align-items: center; gap: 20px; }
-            .ascii-art-portrait { font-size: 4px; line-height: 0.9; }
-            /* La grille projet est gérée par le CSS .projects-grid directement, pas besoin de réécrire ici */
+            
+            /* --- FIX POUR L'IMAGE ASCII SUR MOBILE --- */
+            .ascii-art-portrait {
+                font-size: 1.8vw; /* Taille proportionnelle à la largeur de l'écran */
+                line-height: 0.75;
+                width: 100%;
+                overflow-x: hidden;
+                display: block;
+                white-space: pre;
+            }
+            /* L'animation peut déborder légèrement lors du chargement, on sécurise */
+            .hero-image-container { overflow: hidden; }
         }
     </style>
 </head>
@@ -468,7 +444,7 @@
         </div>
 
         <div class="hero-image-container">
-            <pre class="ascii-art-portrait" id="ascii-portrait">
+<pre class="ascii-art-portrait" id="ascii-portrait">
                                                                           .;+X$$$$$$X+:     :;+XXXXx;:.                                                                       
                                                                       .;$&&&&&&&&&&&&&&&$X$&&&&&&&&&&&&&$X;.                                                                  
                                                                    .+$&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&$x:                                                               
@@ -576,7 +552,8 @@
 ;:.:...:::..:..:...:...:..:.:.....:....::....:......::..:...:......:..:..:..:..::;;:..:;::..::::.:..:..::.:..:..:..:..:.:..:..:..::..:..::.:..::..:...::..:..:.::::.::::..::::
 :;.:...:::...::..:...::::::.:..:....:.....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..:..::.:...::...::.::..:.::..:::::..:.::..:::
 :;...:.:::...:....::::::.::......:....:.....:....:....:......:..::..:..::.::..::..::;+:....:..::.::::.::.::..:..:.::.::.::...::.::.::..:..::.::..::..:..::..:..::.::::::.:::.:
-            </pre>
+
+</pre>
         </div>
 
     </section>
