@@ -385,24 +385,52 @@
             .hero-cta-container { justify-content: center; }
         }
 
+
+	/* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3.5rem; }
-            .cursor { height: 40px; }
-            header { padding: 15px; }
-            section h2 { font-size: 2.8rem; }
-            .hero-cta-container { flex-direction: column; align-items: center; gap: 20px; }
+            /* Ajustement des marges globales pour laisser plus de place au dessin */
+            section { padding: 60px 5%; }
+            .hero { padding: 100px 5% 60px; gap: 40px; }
+
+            /* Titres plus petits */
+            .hero h1 { font-size: 3rem; }
+            section h2 { font-size: 2.5rem; }
             
-            /* --- FIX POUR L'IMAGE ASCII SUR MOBILE --- */
-            .ascii-art-portrait {
-                font-size: 1.8vw; /* Taille proportionnelle à la largeur de l'écran */
-                line-height: 0.75;
+            /* Ajustement du curseur */
+            .cursor { height: 35px; }
+            
+            /* Header compact */
+            header { padding: 15px 20px; }
+            
+            /* Conteneur bouton CTA vertical */
+            .hero-cta-container { flex-direction: column; gap: 20px; }
+
+            /* --- CORRECTION ASCII ART --- */
+            .hero-image-container {
                 width: 100%;
-                overflow-x: hidden;
-                display: block;
-                white-space: pre;
+                overflow: hidden; /* Coupe ce qui dépasse au cas où */
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
             }
-            /* L'animation peut déborder légèrement lors du chargement, on sécurise */
-            .hero-image-container { overflow: hidden; }
+
+            .ascii-art-portrait {
+                /* Le secret est ici : 0.7vw signifie 0.7% de la largeur de l'écran */
+                font-size: 0.7vw !important; 
+                
+                /* On colle les lignes verticalement pour compenser la petite taille */
+                line-height: 0.65vw !important; 
+                
+                /* On force le bloc à ne pas prendre de scrollbar */
+                width: auto;
+                height: auto;
+                overflow: hidden;
+                white-space: pre; /* Garde la structure du dessin */
+                
+                /* Centrage */
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
     </style>
 </head>
