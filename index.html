@@ -10,32 +10,68 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=VT323&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         /* --- VARIABLES & THÈME --- */
         :root {
+            /* --- THÈME CLAIR (Standard / Ingénieur) --- */
             --bg-color: #ffffff;
+            --card-bg: #ffffff;
             --text-color: #2a2a2a;
             --text-light: #666666;
+            --border-color: #eaeaea;
             --gold-primary: #d4af37; 
             --gold-dark: #8c7322; 
             --gold-light: rgba(212, 175, 55, 0.1);
             --font-title: 'VT323', monospace;
             --font-body: 'Fira Code', monospace;
+            --grid-line: #e0e0e0;
+            --shadow-color: rgba(0,0,0,0.05);
 
             /* --- CONFIGURATION DES CURSEURS --- */
             --cursor-default: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><rect x='2' y='2' width='20' height='20' fill='none' stroke='%23d4af37' stroke-width='2'/><circle cx='12' cy='12' r='2' fill='%23d4af37'/></svg>") 12 12, auto;
             --cursor-pointer: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><rect x='2' y='2' width='20' height='20' fill='%23d4af37' stroke='%23d4af37' stroke-width='2'/></svg>") 12 12, pointer;
         }
 
+        /* --- THÈME SOMBRE (Luxe / Cuir / Château 18ème) --- */
+        body.dark-mode {
+            /* Fond Marron "Cuir Profond" / Acajou sombre */
+            --bg-color: #3a2f2a; 
+            
+            /* Cartes Marron "Chocolat" / Cuir plus clair */
+            --card-bg: #4a3e36; 
+            
+            /* Texte "Champagne" / Crème (plus doux que le blanc) */
+            --text-color: #f9f1d8; 
+            
+            /* Texte secondaire "Doré antique" / Beige */
+            --text-light: #d4c5a9; 
+            
+            /* Bordures "Bronze" */
+            --border-color: #5d4037; 
+            
+            /* Or Vif pour les accents */
+            --gold-primary: #e6c265; 
+            --gold-dark: #c49a45; 
+            --gold-light: rgba(230, 194, 101, 0.15);
+            
+            /* Grille de fond subtilement colorée */
+            --grid-line: #423026;
+            
+            /* Ombres plus chaudes */
+            --shadow-color: rgba(0,0,0,0.4);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* --- SCROLLBAR --- */
         ::-webkit-scrollbar { width: 14px; }
-        ::-webkit-scrollbar-track { background: #f4f4f4; border-left: 1px solid #e0e0e0; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); border-left: 1px solid var(--border-color); }
         ::-webkit-scrollbar-thumb { background-color: var(--gold-primary); border: 3px solid var(--bg-color); border-radius: 0px; }
         ::-webkit-scrollbar-thumb:hover { background-color: var(--gold-dark); }
-        html { scrollbar-width: thin; scrollbar-color: var(--gold-primary) #f4f4f4; scroll-behavior: smooth; }
+        html { scrollbar-width: thin; scrollbar-color: var(--gold-primary) var(--bg-color); scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
@@ -43,13 +79,15 @@
             font-family: var(--font-body);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            /* Grille de fond */
+            background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
             background-size: 20px 20px;
             cursor: var(--cursor-default);
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         /* --- GESTION DES CURSEURS --- */
-        a, button, .btn, .btn-large, .header-btn, .project-card, .arrow-btn, .lang-flag {
+        a, button, .btn, .btn-large, .header-btn, .project-card, .arrow-btn, .lang-flag, .theme-toggle {
             text-decoration: none; 
             color: inherit; 
             transition: 0.3s; 
@@ -68,6 +106,7 @@
             width: 100%;
             background: var(--bg-color); 
             z-index: 100;
+            transition: background 0.4s ease;
         }
 
         .logo {
@@ -76,6 +115,38 @@
             color: var(--gold-dark);
             letter-spacing: 2px;
             font-weight: bold;
+        }
+        /* Ajustement logo en mode sombre pour qu'il brille plus */
+        body.dark-mode .logo {
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px rgba(230, 194, 101, 0.3);
+        }
+
+        /* --- BOUTON THEME --- */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--gold-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-dark);
+            font-size: 1.2rem;
+            margin-left: auto;
+            transition: 0.3s;
+        }
+        body.dark-mode .theme-toggle {
+            color: var(--gold-primary);
+            box-shadow: 0 0 10px rgba(230, 194, 101, 0.2);
+        }
+        .theme-toggle:hover {
+            background: var(--gold-primary);
+            color: var(--bg-color);
+        }
+        body.dark-mode .theme-toggle:hover {
+            color: #2b1d16; /* Texte sombre sur fond or au survol */
         }
 
         /* --- HERO SECTION --- */
@@ -97,7 +168,8 @@
             font-size: 5.5rem;
             line-height: 0.9;
             margin-bottom: 25px;
-            color: #000;
+            color: var(--text-color);
+            transition: color 0.4s ease;
         }
 
         .hero .subtitle {
@@ -106,12 +178,13 @@
             margin-bottom: 40px;
             border-left: 3px solid var(--gold-primary);
             padding-left: 20px;
-            background: rgba(212, 175, 55, 0.05);
+            background: var(--gold-light);
             padding: 20px;
+            transition: background 0.4s ease, color 0.4s ease;
         }
 
-        .hero strong { color: #000; font-weight: 600; }
-        .hero .highlight { color: var(--gold-dark); font-weight: bold; }
+        .hero strong { color: var(--text-color); font-weight: 600; }
+        .hero .highlight { color: var(--gold-primary); font-weight: bold; }
 
         .cursor {
             display: inline-block;
@@ -121,6 +194,7 @@
             vertical-align: bottom;
             animation: blink 1s infinite;
         }
+        body.dark-mode .cursor { background-color: var(--gold-primary); }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         /* --- STYLE ASCII ART --- */
@@ -147,8 +221,24 @@
             padding: 0;
             opacity: 0;
             max-height: 0;
-            transition: opacity 1s ease-out;
+            transition: all 0.5s ease-out;
             max-width: 100%;
+        }
+
+        /* --- CORRECTIF : ASCII SUR FOND TAUPE EN MODE SOMBRE --- */
+        body.dark-mode .ascii-art-portrait {
+            /* Couleur TAUPE élégante (#a89f91) */
+            background-color: #a89f91; 
+            
+            /* Texte en Marron Foncé (la couleur de fond du site) pour un contraste "Encre sur Papier" */
+            color: #2b1d16; 
+            
+            text-shadow: none; 
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); /* Ombre portée pour l'effet "posé sur le cuir" */
+            display: inline-block; 
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Fine bordure subtile */
         }
 
         @keyframes scan-in {
@@ -160,6 +250,10 @@
         .ascii-art-portrait.is-loaded {
             animation: scan-in 2s ease-out forwards;
         }
+        
+        body.dark-mode .ascii-art-portrait.is-loaded {
+            opacity: 1 !important;
+        }
 
         /* --- CTA BUTTONS --- */
         .hero-cta-container { display: flex; align-items: center; gap: 40px; margin-top: 20px; }
@@ -169,54 +263,110 @@
             border: 2px solid var(--gold-primary); border-radius: 50%; color: var(--gold-dark);
             font-size: 2rem; transition: 0.3s;
         }
+        body.dark-mode .arrow-btn { color: var(--gold-primary); }
+
         .project-link-text {
             font-family: var(--font-title); font-size: 1.5rem; font-weight: bold;
             color: var(--gold-dark); text-transform: uppercase; transition: 0.3s;
         }
+        body.dark-mode .project-link-text { color: var(--gold-primary); }
+
         .project-link-wrapper:hover .arrow-btn { background: var(--gold-primary); color: #fff; transform: translateY(-3px); }
+        body.dark-mode .project-link-wrapper:hover .arrow-btn { color: #2b1d16; } 
+        
         .project-link-wrapper:hover .project-link-text { color: var(--gold-primary); transform: translateY(-3px); }
 
         /* --- SECTIONS --- */
         section { padding: 100px 10%; }
-        h2 {
-            font-family: var(--font-title); font-size: 3.5rem; margin-bottom: 50px;
-            color: #000; display: inline-block; border-bottom: 4px solid var(--gold-primary); line-height: 0.8;
+        
+        section h2 {
+            font-family: var(--font-title); 
+            font-size: 3.5rem; 
+            margin-bottom: 50px;
+            color: var(--text-color); 
+            display: inline-block; 
+            border-bottom: 4px solid var(--gold-primary); 
+            line-height: 0.8;
+            transition: color 0.4s ease;
         }
 
-        /* --- PROJETS (MODIFIÉ POUR 3 PAR LIGNE) --- */
+        /* --- PROJETS --- */
         .projects-grid { 
             display: grid; 
-            /* 350px permet d'avoir 3 cartes sur un écran standard (~1200px) */
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
             gap: 35px; 
+            align-items: start;
         }
         
         .project-card {
-            background: #fff; border: 1px solid #eaeaea; padding: 0; transition: 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0; transition: 0.3s;
             position: relative; display: flex; flex-direction: column; overflow: hidden;
+            min-height: 400px; 
         }
         .project-card a { display: flex; flex-direction: column; height: 100%; cursor: pointer; }
-        .project-card:hover { border-color: var(--gold-primary); box-shadow: 5px 5px 0px var(--gold-light); }
-        
-        /* Ajustement hauteur média pour équilibre avec la largeur réduite */
-        .project-media { 
-            width: 100%; 
-            height: 280px; /* Un peu moins haut que 350px pour garder l'harmonie */
-            object-fit: cover; 
-            border-bottom: 2px solid var(--gold-light); background-color: #f7f7f7; padding: 0;
+        .project-card:hover { 
+            border-color: var(--gold-primary); 
+            box-shadow: 0px 5px 20px var(--shadow-color);
+            transform: translateY(-5px); 
         }
         
+        .project-media { 
+            width: 100%; 
+            height: 250px;
+            object-fit: cover; 
+            border-bottom: 2px solid var(--gold-light); 
+            background-color: #f7f7f7; 
+            padding: 0;
+            transition: height 0.4s ease, filter 0.4s ease;
+        }
+        /* Teinte sépia/chaleureuse sur les images en mode sombre */
+        body.dark-mode .project-media {
+            filter: brightness(0.9) sepia(0.2);
+            border-bottom: 2px solid var(--border-color);
+        }
+
         .project-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-card h3 { font-family: var(--font-title); font-size: 2rem; margin-bottom: 15px; color: #111; }
-        .project-card p { font-size: 0.95rem; color: #555; margin-bottom: 15px; flex-grow: 1; line-height: 1.5; }
-        .project-tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+        .project-card h3 { 
+            font-family: var(--font-title); font-size: 2rem; margin-bottom: 15px; color: var(--text-color); 
+            transition: color 0.4s ease;
+        }
+        
+        /* --- EFFET HOVER SUR LE TEXTE --- */
+        .project-card p, 
+        .project-card .summary { 
+            font-size: 0.95rem; 
+            color: var(--text-light); 
+            line-height: 1.5;
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .project-card:hover p,
+        .project-card:hover .summary {
+            max-height: 500px;
+            opacity: 1;
+            margin-bottom: 15px;
+            transform: translateY(0);
+        }
+
+        .project-tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; z-index: 10; background: var(--card-bg); transition: background 0.4s ease;}
         .tag { font-size: 0.75rem; background: var(--gold-light); color: var(--gold-dark); padding: 4px 12px; font-weight: 600; border-radius: 2px; }
+        body.dark-mode .tag { color: var(--gold-primary); border: 1px solid var(--gold-light); }
 
         /* --- SKILLS --- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
         .skill-card {
-            background: #fff; border: 1px solid #e0e0e0; padding: 25px;
-            transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); position: relative; overflow: hidden;
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            padding: 25px;
+            transition: 0.3s; box-shadow: 0 4px 6px var(--shadow-color); position: relative; overflow: hidden;
+            color: var(--text-color);
         }
         .skill-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
@@ -225,18 +375,29 @@
         .skill-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); }
         .skill-card:hover::before { transform: scaleX(1); }
         .skill-title { color: var(--gold-dark); margin-bottom: 12px; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; }
+        body.dark-mode .skill-title { color: var(--gold-primary); }
+
         .skill-title::before { content: '>'; margin-right: 10px; font-family: var(--font-title); font-size: 1.5rem; }
+        .skill-card p { color: var(--text-light); }
 
         /* --- FOOTER & BUTTONS --- */
         .btn-large {
             display: inline-block; padding: 12px 35px; border: 2px solid var(--gold-primary);
             color: var(--gold-dark); font-family: var(--font-title); font-size: 1.6rem;
-            text-transform: uppercase; font-weight: bold; transition: all 0.3s ease; background: #fff;
+            text-transform: uppercase; font-weight: bold; transition: all 0.3s ease; background: var(--card-bg);
             cursor: var(--cursor-pointer);
         }
+        body.dark-mode .btn-large { color: var(--gold-primary); }
+
         .btn-large:hover { background: var(--gold-primary); color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px var(--gold-light); }
-        
-        footer { text-align: center; padding: 60px; border-top: 2px solid var(--gold-light); color: var(--text-light); font-size: 0.9rem; background: #fafafa; }
+        body.dark-mode .btn-large:hover { color: #2b1d16; }
+
+        body.dark-mode .btn-linkedin-custom {
+            color: var(--text-color) !important;
+            border-color: var(--text-light) !important;
+        }
+
+        footer { text-align: center; padding: 60px; border-top: 2px solid var(--gold-light); color: var(--text-light); font-size: 0.9rem; background: var(--bg-color); transition: background 0.4s ease; }
         
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
@@ -250,10 +411,10 @@
             .hero h1 { font-size: 3.5rem; }
             .cursor { height: 40px; }
             header { padding: 15px; }
-            h2 { font-size: 2.8rem; }
+            section h2 { font-size: 2.8rem; }
             .hero-cta-container { flex-direction: column; align-items: center; gap: 20px; }
             .ascii-art-portrait { font-size: 4px; line-height: 0.9; }
-            .projects-grid { grid-template-columns: 1fr; } /* 1 colonne sur mobile */
+            .projects-grid { grid-template-columns: 1fr; } 
         }
     </style>
 </head>
@@ -261,6 +422,11 @@
 
     <header>
         <div class="logo">CORENTIN.C_</div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Changer le thème">
+            <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
     </header>
 
     <section class="hero">
@@ -382,23 +548,21 @@
    .;X+:::;::......:.:.......:..:..:.x:.:.::.::++:.::::::;:::++::;;            .                      ......;+;:.::;xXXXX+;::......::::X:......:.::::::::..:..::;:::::;x+:.   
 :+X;:::::.....:..:.....:.:....:..::::x:...:::+;::::::::::::::;:++;:+;.                               .....:+;:;:::;x::::::::x+::::..:.:;;....:::::.::::...::..:....::;::::;x+:
 ::::.:....:.....:...:....:.::.......:x:.::;+;:::::::::::::::::;+;;x;::+:.                     .     ...:+X;.::;.:++:::::::::::+x:::.:.::x.:::::.::::..::.:..::.::::..::::;::::
-.......:....:.....:...:........:....:x::;+:::::::::::::::::::::;;+;:;+:;+:.                  ..     .:+++:...::;+;::::::::::::::;+;::.::+::::::::..::..:.::.:::::::.......:::;
-...:.....:....:....:....:....:...:...+:x:::::::::::::::....::::::;;:::::;;+:.               :.     .;+;;:::;+;:::::::::..:::::::::;x;::.;;::::....:..:..:..:::::::.::.::......
-.:...:.....:....:....:....:........:::;:..:::::::::::::::::..::::::+:::::;;:;;:           .:.     :+;++x+;::.::::::::..::::::::::::::;x;;+...:.::.:..::.:::::.::...:..:.::.::.
+.......:....:.....:...:....:....:........:::;:..:::::::::::::::::..::::::+:::::;;:;;:           .:.     :+;++x+;::.::::::::..::::::::::::::;x;;+...:.::.:..::.::.:::::.::...:..:.::.::.
 .......:.....:....:....::..::..:.....:..:...:::::::::....::::.::::::;;:::::;:::+:        .:.    .+;:::;:.:.::::::::..:............:..:::X:::..:..:.::.:::::.:::::.::.:..:..:.:
-:..:.....:..::.::...:......:.....:..:.................:..:.:::.:::::::;;::::;+;:;;.  ...::.    ;+::;;;:..:::::::..:..::.::.::.:::.:...:.:..::.:..:..:.:::..:::..:...::.:..:..:
+:..:.....:..::.::...:......:.....:..:.................:..:.:::.:::::::;;::::;+;:;;.  ...::.    ;+::;;;:..:::::::..:..::.::.::.::.:::.:...:.:..::.:..:..:.:::..:::..:...::.:..:..:
 ::...::...............:..:...:........:..:::..:..:....::..:::::..:::::.:;::::::;;:;:   .     .+:.:;+;::::::.:..:.:.::..:..::.::..:.::...::..:..::..:....::::..:::..::...::.:::
 ::.::.:::.::..:..:.............:..:...::.........::::.....:.::::....:::::;;::::::;;+;.     .:;:.:;+:..::.....::.::..:..:.::..:..::..::.:.::..:....::::..:::..::..:.::...::::::
 ::..:.::...........:...:..:.........:.......:..:....::..:...:..::.:..::::::;;:..:::;+;.   .;;::;x:.:.....:..:...:.:..::..:..:..:..:.:..::.::.::::..:::::.::..:..:.::.:::::.
 :::..:::..:::..:..::........:...:.......:.................::..:..::..:..:::::;:.::::;;+  :;:;+;:;....:..::..:.::..::..:.:..::.::..::..:.:..:..:::::.:.:::..::.::..:..::::::::.
-.:::::::..:::........:..::....:...:..:....::..:..::...:..:..::...:.::..:.::.:::;:.::::;x;+;+::..;:...:..:.....:.....:..::.:..:..::..:.:.:...::::..:.:::::..:..:..::.:.::.::::.
+.:::::::..:::........:..::....:...:..:....::..:..::...:..:..::...:.::..:.::.::.:::;:.::::;x;+;+::..;:...:..:.....:.....:..::.:..:..::..:.:.:...::::..:.:::::..:..:..::.:.::.::::.
 .::::::.::::..:..:.........:........:..:............:........:.::..:..::::::...:::::::;X+;:..:::::........:.....:..:.:...::..:..::..:..::::.:::::::...::..:..:..:::::.:::.:
 ...:::..:.::.......:..:..:..:..:....:..::..:...:..:..:..::.:..:..::..:..:::::::..::::+Xx;:....:;:..:..:.....::.::.::.::..:.::.::..:..::.::::..::::::.:::..:.::.::.::::.::::.::
 :....:.:.:::...:.................:...........:....:.....:......:..:.::..:.::::::::.:+x;:;;::..:;:...:..:::.:..:..:..:..::..:..:..::..:.::::::::::..:..::..:...:..::::..::::.::
-:::.:..:.::..:..:::..:..:..:.::....:..:..:.....::...:.....::.:.::..:......::::::..:+;;::;:;:...;:.:..:...:.:..:..:..:..:..:..:..::.:::::.::...::.:...::.::.:..:::.:::::..::
+:::.:..:.::..:..:::..:..:..:.::....:..:..:.....::...:.....::.:.::..:......::::::..:+;;::;:;:...;:.:..:...:.:..:..:..:..:..:..::.::...::.:...::.::.:..:::.:::::..::
 ;....::..::............::.::....:.....::...:......::..:..........:.:.::.::..::::::+;.;;::;;:...::.::.::..:..::.::.::.::..::.::.::..:..:...:..:.:..:.:::.::..:..::::..::::..:::
-;:.:...:::..:..:...:...:..:.:.....:....::....:......::..:...:......:..:..:..:..::;;:..:;::..::::.:..:..::.:..:..:..:..:.:..:..:..::..:..::.:..::..:...::..:..:.::::.::::..::::
-:;.:...:::...::..:...::::::.:..:....:.....:....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..:..::.:...::...::.::..:.::..:::::..:.::..:::
+;:.:...:::..:..:...:...:..:.:.....:....::....:......::..:...:......:..:..:..:..::;;:..:;::..::::.:..:..::.:..:..:..:..:..:.:..:..:..::..:..::.:..::..:...::..:..:.::::.::::..::::
+:;.:...:::...::..:...::::::.:..:....:.....:....:....:....:......:..::..:..::.::..::;+:..::..:..::.:..:..:..::..:..:..:..::..:..:..::.:...::...::.::..:.::..:::::..:.::..:::
 :;...:.:::...:....::::::.::......:....:.....:....:....:......:..::..:..::.::..::..::;+:....:..::.::::.::.::..:..:.::.::.::...::.::.::..:..::.::..::..:..::..:..::.::::::.:::.:
             </pre>
         </div>
@@ -475,10 +639,8 @@
                                 </div>
                             </a>
                         </div>
-            <!-- CARTE 1 : PROJET CLEAR-DATA (Base de Données) -->
             <div class="project-card">
                 <a href="https://github.com/CorentinCARTLL/Projet-ClearDATA" target="_blank">
-                    <!-- Utilisation d'un placeholder pour l'image avec le nom de fichier suggéré -->
                     <img 
                         src="cleardata.png" 
                         alt="Architecture de base de données Clear-DATA SQL" 
@@ -588,7 +750,7 @@
 
     <section id="contact" style="text-align: center; margin-bottom: 50px;">
         <h2>03. Connexion</h2>
-        <p style="margin-bottom: 40px; font-size: 1.2rem; color: #555;">
+        <p style="margin-bottom: 40px; font-size: 1.2rem; color: var(--text-light);">
             Prêt à intégrer vos équipes pour un stage ingénieur dès Avril 2026.
         </p>
         
@@ -598,7 +760,7 @@
                 Copier mon Email
             </button>
 
-            <a href="https://www.linkedin.com/in/corentin-cartallier-71a56035a" target="_blank" class="btn-large" style="background: transparent; color:var(--text-color); border-color: #333;">
+            <a href="https://www.linkedin.com/in/corentin-cartallier-71a56035a" target="_blank" class="btn-large btn-linkedin-custom" style="background: transparent; color:var(--text-color); border-color: #333;">
                 LinkedIn
             </a>
 
@@ -619,27 +781,46 @@
     </footer>
 
     <script>
-        // --- PREVENTION DE L'INSPECTION ---
-        document.addEventListener('contextmenu', event => event.preventDefault()); // Bloque le clic droit
+        // --- LOGIQUE MODE SOMBRE ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
 
-        document.addEventListener('keydown', function(event) {
-            // Bloque F12
-            if (event.key === 'F12') {
-                event.preventDefault();
-            }
+        // SVG Icons
+        const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        const sunIcon = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
 
-            // Bloque Ctrl+Shift+I/J/U et Cmd+Option+I/J/U (Chrome/Mac)
-            if ((event.ctrlKey || event.metaKey) && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j')) {
-                event.preventDefault();
-            }
+        // Vérifier la préférence sauvegardée
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.innerHTML = sunIcon;
+        } else {
+            themeIcon.innerHTML = moonIcon;
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
             
-            // Bloque Ctrl+U / Cmd+U
-            if ((event.ctrlKey || event.metaKey) && (event.key === 'U' || event.key === 'u')) {
-                event.preventDefault();
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
             }
         });
 
-        // Fonction pour afficher/masquer le bouton de retour en haut (Supprimée du HTML/CSS, mais le JS ne s'exécutera pas)
+
+        // --- PREVENTION DE L'INSPECTION ---
+        document.addEventListener('contextmenu', event => event.preventDefault()); 
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'F12') event.preventDefault();
+            if ((event.ctrlKey || event.metaKey) && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j')) event.preventDefault();
+            if ((event.ctrlKey || event.metaKey) && (event.key === 'U' || event.key === 'u')) event.preventDefault();
+        });
 
         // Effet Machine à écrire
         const text = "Corentin Cartallier";
@@ -671,10 +852,9 @@
                 btn.style.color = "#fff";
                 btn.style.borderColor = "var(--gold-primary)";
 
-                // Revenir à l'état normal après 2 secondes
                 setTimeout(() => {
                     btn.innerText = originalText;
-                    btn.style.background = "#fff";
+                    btn.style.background = "var(--card-bg)";
                     btn.style.color = "var(--gold-dark)";
                     btn.style.borderColor = "var(--gold-primary)";
                 }, 2000);
