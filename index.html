@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corentin Cartallier | Software Engineer</title>
+    <title>Corentin Cartallier</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23d4af37'/></svg>">
 
@@ -172,12 +172,12 @@
            HERO
         ============================================================ */
         .hero {
-            min-height: 100svh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 80px 5% 60px;
-            gap: 2rem;
+            padding: 60px 5% 60px;
+            gap: 3rem;
         }
 
         .hero-text-content { width: 100%; }
@@ -217,7 +217,7 @@
             border-left: 3px solid var(--gold);
             padding: 0.75rem 1rem;
             background: var(--gold-tint);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             transition: background 0.4s ease, color 0.4s ease;
         }
 
@@ -291,7 +291,10 @@
         /* ASCII art */
         .hero-image-container {
             width: 100%;
-            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            order: -1;
         }
 
         .ascii-scaler {
@@ -305,9 +308,10 @@
             line-height: 0.95;
             color: var(--gold-dark);
             white-space: pre;
-            display: block;
+            display: inline-block;
+            width: max-content;
             opacity: 0;
-            transform-origin: top center;
+            transform-origin: top left;
             transition: opacity 0.5s ease-out;
         }
         body.dark-mode .ascii-art-portrait {
@@ -316,6 +320,7 @@
             text-shadow: none;
             padding: 16px;
             border: 1px solid rgba(255,255,255,0.1);
+            width: max-content;
         }
         @keyframes scan-in {
             from { opacity: 0; }
@@ -331,19 +336,19 @@
             .subtitle { font-size: 1rem; }
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 992px) {
             .hero {
                 flex-direction: row;
-                align-items: flex-start;
+                align-items: center;
                 justify-content: space-between;
                 padding: 60px 10% 80px;
                 gap: 4rem;
             }
-            .hero-text-content { flex: 1; max-width: 620px; }
+            .hero-text-content { flex: 1; max-width: 50%; }
             .hero-image-container {
-                flex: 0 0 22%;
-                margin-top: 0;
+                flex: 0 0 45%;
                 text-shadow: 0 0 6px var(--gold-tint);
+                order: 0;
             }
         }
 
@@ -581,7 +586,7 @@
 <body>
 
     <header>
-        <div class="logo">CORENTIN.C_</div>
+        <div class="logo">CORENTIN.CARTALLIER</div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
             <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -596,7 +601,7 @@
             <h1>Corentin<br>Cartallier<span class="cursor"></span></h1>
 
             <div class="subtitle">
-                Software & Systems Engineer. My approach is simple: code must serve reality. Bridging the gap between high-level software and physical infrastructures.
+                French Software & Systems Engineer. My approach is simple: code must serve reality. Bridging the gap between high-level software and physical infrastructures.
             </div>
 
             <div class="hero-cta-container">
@@ -738,7 +743,7 @@
                 <div class="operation-header">
                     <div>
                         <p class="operation-org">Thales Alenia Space</p>
-                        <h3>Software & Electronics Engineer</h3>
+                        <h3>Software & Electronics Engineering Intern - Payload</h3>
                     </div>
                     <span class="operation-status">&#9646; Active</span>
                 </div>
@@ -824,12 +829,26 @@
         <h2>03. Stack</h2>
         <div class="skills-grid">
             <div class="skill-card">
-                <div class="skill-title">AI & DATA</div>
-                <p>Python, PyTorch, Vector Databases, SQL.</p>
+                <div class="skill-title">INFRASTRUCTURE & NETWORKS</div>
+                <p> Systems Administration: Linux (Debian/Ubuntu), Windows Server, Bare-metal architectures</p>
+		<p> Networking: Cisco Networking, LAN/WAN/VPN, VLAN segmentation, pfSenses</p>
+		<p> Industrial IT: IT/OT Convergence, Industrial Protocolss</p>
+		<p> Virtualization & Containerization: Proxmox, VMware, Dockers</p>
+		<p> Automation: Infrastructure as Code (IaC), Advanced Homelab deployments</p>
             </div>
             <div class="skill-card">
-                <div class="skill-title">SYSTEMS & NETWORKS</div>
-                <p>C/C++, Linux, Cisco Networking, Industrial Protocols.</p>
+                <div class="skill-title">CYBERSECURITY</div>
+                <p> Network Security: Perimeter defense, IT/OT network resilience, Firewall segmentation<p/>
+		<p> Cyber Defense: System hardening, Log analysis, Threat detection</p>
+		<p> Specialized Security: Drone cybersecurity, Critical infrastructure protection</p>
+		<p> Governance: ISO 27001 concepts</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-title">SOFTWARE ENGINEERING & AI</div>
+                <p> Languages: Python (Data Science, Backend, Scripting), C/C++, Bash</p>
+		<p> Data & Databases: SQL, Vector Databases</p>
+		<p> Artificial Intelligence: PyTorch, Agentic AI Architectures, RAG frameworks</p>
+		<p> Integration: API development and orchestration</p>
             </div>
         </div>
     </section>
@@ -846,7 +865,7 @@
                 Copy Email
             </button>
 
-            <a href="https://www.linkedin.com/in/corentin-cartallier-71a56035a" target="_blank" class="btn-large btn-linkedin-custom" style="background: transparent; color:var(--text); border-color: #333;">
+            <a href="https://www.linkedin.com/in/corentin-cartallier" target="_blank" class="btn-large btn-linkedin-custom" style="background: transparent; color:var(--text); border-color: #333;">
                 LinkedIn
             </a>
 
@@ -921,7 +940,7 @@
             const containerWidth = scaler.clientWidth;
             const scale = Math.min(1, containerWidth / naturalWidth);
             portrait.style.transform = `scale(${scale})`;
-            portrait.style.transformOrigin = 'top center';
+            portrait.style.transformOrigin = 'top left';
             scaler.style.height = Math.ceil(naturalHeight * scale) + 'px';
         }
         window.addEventListener('resize', scaleAscii);
