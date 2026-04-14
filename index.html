@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corentin Cartallier | Ingénieur</title>
+    <title>Corentin Cartallier | Software Engineer</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23d4af37'/></svg>">
 
@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=VT323&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <meta property="og:title" content="Portfolio de Corentin Cartallier - Ingénieur Logiciel & IA" />
-    <meta property="og:description" content="Découvrez mes projets : Hackathon IA, Python, C++, et automatisation Azure. Le code parle mieux que les mots." />
+    <meta property="og:title" content="Corentin Cartallier | Software &amp; Systems Engineer" />
+    <meta property="og:description" content="Software &amp; Systems Engineer. Automated data pipelines at Thales Alenia Space. Co-founder &amp; Head of Tech at CICN. Code must serve reality." />
     <meta property="og:image" content="https://www.ton-site.com/chemin-vers-ton-image.jpg" />
     <meta property="og:url" content="https://www.ton-site.com/" />
     <meta property="og:type" content="website" />
@@ -288,9 +288,15 @@
             border-color: var(--text-muted) !important;
         }
 
-        /* ASCII art — caché sur mobile, visible sur desktop */
+        /* ASCII art */
         .hero-image-container {
-            display: none;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .ascii-scaler {
+            width: 100%;
+            overflow: hidden;
         }
 
         .ascii-art-portrait {
@@ -299,10 +305,10 @@
             line-height: 0.95;
             color: var(--gold-dark);
             white-space: pre;
+            display: block;
             opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s ease-out;
+            transform-origin: top center;
+            transition: opacity 0.5s ease-out;
         }
         body.dark-mode .ascii-art-portrait {
             background-color: #a89f91;
@@ -312,9 +318,8 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
         @keyframes scan-in {
-            0%   { opacity: 0; max-height: 0; }
-            10%  { opacity: 0.5; }
-            100% { opacity: 0.85; max-height: 600px; }
+            from { opacity: 0; }
+            to   { opacity: 0.85; }
         }
         .ascii-art-portrait.is-loaded {
             animation: scan-in 2s ease-out forwards;
@@ -329,19 +334,15 @@
         @media (min-width: 1024px) {
             .hero {
                 flex-direction: row;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: space-between;
                 padding: 60px 10% 80px;
                 gap: 4rem;
             }
             .hero-text-content { flex: 1; max-width: 620px; }
             .hero-image-container {
-                display: flex;
                 flex: 0 0 22%;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                max-height: 520px;
+                margin-top: 0;
                 text-shadow: 0 0 6px var(--gold-tint);
             }
         }
@@ -581,7 +582,7 @@
 
     <header>
         <div class="logo">CORENTIN.C_</div>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Changer le thème">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
             <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
@@ -608,11 +609,12 @@
                     </div>
                     <span class="project-link-text">Current Operations</span>
                 </a>
-                <a href="#contact" class="btn-large">Me Contacter</a>
+                <a href="#contact" class="btn-large">Contact</a>
             </div>
         </div>
 
         <div class="hero-image-container">
+        <div class="ascii-scaler">
 <pre class="ascii-art-portrait" id="ascii-portrait">
                                                                           .;+X$$$$$$X+:     :;+XXXXx;:.                                                                       
                                                                       .;$&&&&&&&&&&&&&&&$X$&&&&&&&&&&&&&$X;.                                                                  
@@ -724,6 +726,7 @@
 
 </pre>
         </div>
+        </div>
 
     </section>
 
@@ -735,7 +738,7 @@
                 <div class="operation-header">
                     <div>
                         <p class="operation-org">Thales Alenia Space</p>
-                        <h3>Software & Electronics Engineering Intern</h3>
+                        <h3>Software & Electronics Engineer</h3>
                     </div>
                     <span class="operation-status">&#9646; Active</span>
                 </div>
@@ -756,7 +759,7 @@
                 <div class="operation-header">
                     <div>
                         <p class="operation-org">Club Info Cesi Nice — CICN</p>
-                        <h3>Co-founder & Head of Technology</h3>
+                        <h3>Co-founder & Head of Tech</h3>
                     </div>
                     <span class="operation-status">&#9646; Active</span>
                 </div>
@@ -782,7 +785,7 @@
 
             <div class="archive-row">
                 <span class="archive-index">[01]</span>
-                <span class="archive-title">Hackathon Azure IA 2025 — Prix de l'Innovation</span>
+                <span class="archive-title">Azure AI Hackathon 2025 — Innovation Award</span>
                 <div class="archive-tags">
                     <span class="tag">Azure AI</span>
                     <span class="tag">Multi-Agents</span>
@@ -832,15 +835,15 @@
     </section>
 
     <section id="contact" style="text-align: center; margin-bottom: 50px;">
-        <h2>03. Connexion</h2>
+        <h2>04. Contact</h2>
         <p style="margin-bottom: 40px; font-size: 1.1rem; color: var(--text-muted);">
-            Software & Systems Engineer — open to serious opportunities.
+            Software &amp; Systems Engineer — open to serious opportunities.
         </p>
 
         <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
 
             <button id="btn-copy-email" class="btn-large" onclick="copyEmail()">
-                Copier mon Email
+                Copy Email
             </button>
 
             <a href="https://www.linkedin.com/in/corentin-cartallier-71a56035a" target="_blank" class="btn-large btn-linkedin-custom" style="background: transparent; color:var(--text); border-color: #333;">
@@ -848,7 +851,7 @@
             </a>
 
             <a href="cv.pdf" target="_blank" class="btn-large">
-                Mon CV (PDF)
+                CV (PDF)
             </a>
 
         </div>
@@ -864,19 +867,15 @@
     </footer>
 
     <script>
-        // --- LOGIQUE MODE SOMBRE ---
+        // --- DARK MODE ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        // SVG Icons
         const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
         const sunIcon = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
 
-        // Vérifier la préférence sauvegardée
-        const savedTheme = localStorage.getItem('theme');
-
-        if (savedTheme === 'dark') {
+        if (localStorage.getItem('theme') === 'dark') {
             body.classList.add('dark-mode');
             themeIcon.innerHTML = sunIcon;
         } else {
@@ -885,7 +884,6 @@
 
         themeToggleBtn.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-
             if (body.classList.contains('dark-mode')) {
                 themeIcon.innerHTML = sunIcon;
                 localStorage.setItem('theme', 'dark');
@@ -895,17 +893,7 @@
             }
         });
 
-
-        // --- PREVENTION DE L'INSPECTION ---
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'F12') event.preventDefault();
-            if ((event.ctrlKey || event.metaKey) && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j')) event.preventDefault();
-            if ((event.ctrlKey || event.metaKey) && (event.key === 'U' || event.key === 'u')) event.preventDefault();
-        });
-
-        // Effet Machine à écrire
+        // --- TYPEWRITER ---
         const text = "Corentin Cartallier";
         const titleElement = document.querySelector('h1');
         titleElement.innerHTML = "";
@@ -922,47 +910,55 @@
             }
         }
 
-        // Fonction pour copier l'email
+        // --- ASCII SCALE ---
+        function scaleAscii() {
+            const portrait = document.getElementById('ascii-portrait');
+            if (!portrait) return;
+            const scaler = portrait.parentElement;
+            portrait.style.transform = 'scale(1)';
+            const naturalWidth = portrait.scrollWidth;
+            const naturalHeight = portrait.scrollHeight;
+            const containerWidth = scaler.clientWidth;
+            const scale = Math.min(1, containerWidth / naturalWidth);
+            portrait.style.transform = `scale(${scale})`;
+            portrait.style.transformOrigin = 'top center';
+            scaler.style.height = Math.ceil(naturalHeight * scale) + 'px';
+        }
+        window.addEventListener('resize', scaleAscii);
+
+        // --- COPY EMAIL ---
         function copyEmail() {
             const email = "corentin.cartallier@gmail.com";
             navigator.clipboard.writeText(email).then(() => {
                 const btn = document.getElementById('btn-copy-email');
                 const originalText = btn.innerText;
-
-                // Feedback visuel
-                btn.innerText = "Email Copié !";
+                btn.innerText = "Email Copied!";
                 btn.style.background = "var(--gold)";
                 btn.style.color = "#fff";
                 btn.style.borderColor = "var(--gold)";
-
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.background = "var(--card-bg)";
                     btn.style.color = "var(--gold-dark)";
                     btn.style.borderColor = "var(--gold)";
                 }, 2000);
-            }).catch(err => {
-                console.error('Erreur lors de la copie :', err);
-            });
+            }).catch(err => console.error('Copy failed:', err));
         }
 
         window.onload = function() {
             typeWriter();
             const asciiPortrait = document.getElementById('ascii-portrait');
             if (asciiPortrait) {
-                setTimeout(() => {
-                    asciiPortrait.classList.add('is-loaded');
-                }, 500);
+                scaleAscii();
+                setTimeout(() => asciiPortrait.classList.add('is-loaded'), 500);
             }
         };
 
-        // Scroll doux
+        // --- SMOOTH SCROLL ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
